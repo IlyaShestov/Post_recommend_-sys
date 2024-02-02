@@ -5,27 +5,25 @@
 
 """
 import pandas as pd
-from tqdm import tqdm
-import url
-conn_uri = url.conn_uri
+from src.data.url import conn_uri
 
 def get_user(conn_uri_):
-    return pd.read_sql("""SELECT * FROM public.user_data """ , conn_uri_ )
+    return pd.read_sql("""SELECT * FROM public.user_data """ , conn_uri)
 
 def get_post(conn_uri_):
-    return pd.read_sql("""SELECT * FROM public.post_text_df""", conn_uri_ )
+    return pd.read_sql("""SELECT * FROM public.post_text_df""", conn_uri)
      
 def get_feed(conn_uri_, n_feed): 
-    return pd.read_sql(f"""SELECT * FROM public.feed_data limit {n_feed}""", conn_uri_ )   
+    return pd.read_sql(f"""SELECT * FROM public.feed_data limit {n_feed}""", conn_uri)
 
 def get_feed_2(conn_uri_, n_feed): 
-    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  action = 'view' limit {n_feed}""", conn_uri_ )   
+    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  action = 'view' limit {n_feed}""", conn_uri)
 
 def get_feed_like(conn_uri_, n_feed): 
-    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  (action = 'view' and target= 1) limit {n_feed}""", conn_uri_ )   
+    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  (action = 'view' and target= 1) limit {n_feed}""", conn_uri)
 
 def get_feed_not_like(conn_uri_, n_feed): 
-    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  (action = 'view'and target= 0) limit {n_feed}""", conn_uri_ )   
+    return pd.read_sql(f"""SELECT * FROM public.feed_data  where  (action = 'view'and target= 0) limit {n_feed}""", conn_uri)
 
 # 1 млн лайков
 feed_like = get_feed_like(conn_uri, 1000000)

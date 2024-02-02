@@ -1,12 +1,8 @@
-from api.schemas import PostGet
-from fastapi import FastAPI, Depends, HTTPException
 from datetime import datetime
-from typing import List
+import pandas as pd
 
-app = FastAPI()
-
-@app.get("/post/recommendations/", response_model=List[PostGet])
-def recommended_posts(id: int, time: datetime, limit: int = 5) -> List[PostGet]:
+#def recommended_posts(id: int, time: datetime, limit: int = 5):
+def recommended_posts(id: int, time, user_transformd_ ,post_sort, model_cat, limit: int = 5):
     """
     Функция принимает на вход id  пользователя, время реакции пользователья на пост и лимит рекомендаций
     Возвращает пользователю рекомендации в количестве limit
